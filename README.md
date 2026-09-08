@@ -13,9 +13,10 @@ Complements the existing `orders` / `shipments` APIs.
 3. Your base URL becomes:
    `https://my-json-server.typicode.com/<github-user>/procurement-api`
 
-> Note: My JSON Server's free tier caps `db.json` at **5 top-level resources**, so
-> this set is trimmed to the 5 below. Run `npx json-server db.json` locally if you
-> want to add more (equipment, contracts, bill-of-materials, etc.).
+> Note: My JSON Server's free tier caps records at **5 fields each** (and this set
+> at 5 resources). Records here are trimmed to their 5 most useful fields. Run
+> `npx json-server db.json` locally to lift both limits and add richer records or
+> more resources (equipment, contracts, bill-of-materials, etc.).
 
 Auto-generated routes (from the top-level keys in `db.json`):
 

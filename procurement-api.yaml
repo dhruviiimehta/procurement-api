@@ -163,11 +163,8 @@ components:
       properties:
         id: { type: integer }
         name: { type: string }
-        country: { type: string }
         category: { type: string }
-        leadTimeDays: { type: integer }
         rating: { type: number }
-        paymentTerms: { type: string }
         status: { type: string }
     RawMaterial:
       type: object
@@ -175,27 +172,16 @@ components:
         id: { type: integer }
         sku: { type: string }
         name: { type: string }
-        unit: { type: string }
         unitCost: { type: number }
         vendorId: { type: integer }
-        hazardous: { type: boolean }
     PurchaseOrder:
       type: object
       properties:
         id: { type: integer }
         vendorId: { type: integer }
         status: { type: string }
-        orderDate: { type: string, format: date }
-        currency: { type: string }
         total: { type: number }
-        lineItems:
-          type: array
-          items:
-            type: object
-            properties:
-              materialId: { type: integer }
-              qty: { type: number }
-              unitCost: { type: number }
+        orderDate: { type: string, format: date }
     ProductionRun:
       type: object
       properties:
@@ -203,19 +189,13 @@ components:
         productName: { type: string }
         quantity: { type: integer }
         status: { type: string }
-        equipment: { type: string }
-        startDate: { type: string, format: date }
-        endDate: { type: string, format: date, nullable: true }
         yieldPct: { type: number, nullable: true }
     QualityInspection:
       type: object
       properties:
         id: { type: integer }
         runId: { type: integer }
-        materialId: { type: integer }
         poId: { type: integer }
-        inspector: { type: string }
         result: { type: string }
         defectRate: { type: number }
         inspectedDate: { type: string, format: date }
-        notes: { type: string }

@@ -1,30 +1,30 @@
 {
   "vendors": [
-    { "id": 9001, "name": "WidgetWorks Mfg", "country": "US", "category": "metals", "leadTimeDays": 7, "rating": 4.6, "paymentTerms": "NET30", "status": "active" },
-    { "id": 9002, "name": "GadgetForge Ltd", "country": "DE", "category": "electronics", "leadTimeDays": 21, "rating": 4.2, "paymentTerms": "NET45", "status": "active" },
-    { "id": 9003, "name": "CableCo Asia", "country": "CN", "category": "components", "leadTimeDays": 30, "rating": 3.9, "paymentTerms": "NET60", "status": "on_hold" }
+    { "id": 9001, "name": "WidgetWorks Mfg", "category": "metals", "rating": 4.6, "status": "active" },
+    { "id": 9002, "name": "GadgetForge Ltd", "category": "electronics", "rating": 4.2, "status": "active" },
+    { "id": 9003, "name": "CableCo Asia", "category": "components", "rating": 3.9, "status": "on_hold" }
   ],
 
   "raw-materials": [
-    { "id": 101, "sku": "ALU-SHEET-2MM", "name": "Aluminium Sheet 2mm", "unit": "sqm", "unitCost": 14.5, "vendorId": 9001, "hazardous": false },
-    { "id": 102, "sku": "STL-ROD-10MM", "name": "Steel Rod 10mm", "unit": "m", "unitCost": 3.2, "vendorId": 9001, "hazardous": false },
-    { "id": 103, "sku": "PCB-BLANK-4L", "name": "PCB Blank 4-Layer", "unit": "each", "unitCost": 6.75, "vendorId": 9002, "hazardous": false },
-    { "id": 104, "sku": "SOLV-IPA-99", "name": "Isopropyl Alcohol 99%", "unit": "litre", "unitCost": 2.1, "vendorId": 9003, "hazardous": true }
+    { "id": 101, "sku": "ALU-SHEET-2MM", "name": "Aluminium Sheet 2mm", "unitCost": 14.5, "vendorId": 9001 },
+    { "id": 102, "sku": "STL-ROD-10MM", "name": "Steel Rod 10mm", "unitCost": 3.2, "vendorId": 9001 },
+    { "id": 103, "sku": "PCB-BLANK-4L", "name": "PCB Blank 4-Layer", "unitCost": 6.75, "vendorId": 9002 },
+    { "id": 104, "sku": "SOLV-IPA-99", "name": "Isopropyl Alcohol 99%", "unitCost": 2.1, "vendorId": 9003 }
   ],
 
   "purchase-orders": [
-    { "id": 5001, "vendorId": 9001, "status": "received", "orderDate": "2026-08-14", "currency": "USD", "total": 2900.0, "lineItems": [ { "materialId": 101, "qty": 100, "unitCost": 14.5 }, { "materialId": 102, "qty": 450, "unitCost": 3.2 } ] },
-    { "id": 5002, "vendorId": 9002, "status": "approved", "orderDate": "2026-09-01", "currency": "EUR", "total": 3375.0, "lineItems": [ { "materialId": 103, "qty": 500, "unitCost": 6.75 } ] },
-    { "id": 5003, "vendorId": 9003, "status": "pending_approval", "orderDate": "2026-09-06", "currency": "USD", "total": 420.0, "lineItems": [ { "materialId": 104, "qty": 200, "unitCost": 2.1 } ] }
+    { "id": 5001, "vendorId": 9001, "status": "received", "total": 2900.0, "orderDate": "2026-08-14" },
+    { "id": 5002, "vendorId": 9002, "status": "approved", "total": 3375.0, "orderDate": "2026-09-01" },
+    { "id": 5003, "vendorId": 9003, "status": "pending_approval", "total": 420.0, "orderDate": "2026-09-06" }
   ],
 
   "production-runs": [
-    { "id": 6001, "productName": "Blue Widget", "quantity": 400, "status": "completed", "equipment": "Stamping Press A", "startDate": "2026-08-20", "endDate": "2026-08-21", "yieldPct": 98.5 },
-    { "id": 6002, "productName": "Gadget Pro", "quantity": 500, "status": "in_progress", "equipment": "SMT Line B", "startDate": "2026-09-05", "endDate": null, "yieldPct": null }
+    { "id": 6001, "productName": "Blue Widget", "quantity": 400, "status": "completed", "yieldPct": 98.5 },
+    { "id": 6002, "productName": "Gadget Pro", "quantity": 500, "status": "in_progress", "yieldPct": null }
   ],
 
   "quality-inspections": [
-    { "id": 8001, "runId": 6001, "inspector": "M. Alvarez", "result": "pass", "defectRate": 1.5, "inspectedDate": "2026-08-21", "notes": "Within spec" },
-    { "id": 8002, "materialId": 104, "poId": 5003, "inspector": "R. Okafor", "result": "fail", "defectRate": 12.0, "inspectedDate": "2026-09-07", "notes": "Purity below spec" }
+    { "id": 8001, "runId": 6001, "result": "pass", "defectRate": 1.5, "inspectedDate": "2026-08-21" },
+    { "id": 8002, "poId": 5003, "result": "fail", "defectRate": 12.0, "inspectedDate": "2026-09-07" }
   ]
 }
