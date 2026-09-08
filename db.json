@@ -18,29 +18,13 @@
     { "id": 5003, "vendorId": 9003, "status": "pending_approval", "orderDate": "2026-09-06", "currency": "USD", "total": 420.0, "lineItems": [ { "materialId": 104, "qty": 200, "unitCost": 2.1 } ] }
   ],
 
-  "bill-of-materials": [
-    { "id": 401, "productId": 7001, "productName": "Blue Widget", "components": [ { "materialId": 101, "qtyPerUnit": 0.25 }, { "materialId": 102, "qtyPerUnit": 0.5 } ] },
-    { "id": 402, "productId": 7003, "productName": "Gadget Pro", "components": [ { "materialId": 103, "qtyPerUnit": 1 }, { "materialId": 104, "qtyPerUnit": 0.05 } ] }
-  ],
-
   "production-runs": [
-    { "id": 6001, "productId": 7001, "bomId": 401, "quantity": 400, "status": "completed", "equipmentId": 301, "startDate": "2026-08-20", "endDate": "2026-08-21", "yieldPct": 98.5 },
-    { "id": 6002, "productId": 7003, "bomId": 402, "quantity": 500, "status": "in_progress", "equipmentId": 302, "startDate": "2026-09-05", "endDate": null, "yieldPct": null }
+    { "id": 6001, "productName": "Blue Widget", "quantity": 400, "status": "completed", "equipment": "Stamping Press A", "startDate": "2026-08-20", "endDate": "2026-08-21", "yieldPct": 98.5 },
+    { "id": 6002, "productName": "Gadget Pro", "quantity": 500, "status": "in_progress", "equipment": "SMT Line B", "startDate": "2026-09-05", "endDate": null, "yieldPct": null }
   ],
 
   "quality-inspections": [
-    { "id": 8001, "runId": 6001, "inspector": "M. Alvarez", "result": "pass", "defectRate": 1.5, "inspectedDate": "2026-08-21" },
+    { "id": 8001, "runId": 6001, "inspector": "M. Alvarez", "result": "pass", "defectRate": 1.5, "inspectedDate": "2026-08-21", "notes": "Within spec" },
     { "id": 8002, "materialId": 104, "poId": 5003, "inspector": "R. Okafor", "result": "fail", "defectRate": 12.0, "inspectedDate": "2026-09-07", "notes": "Purity below spec" }
-  ],
-
-  "equipment": [
-    { "id": 301, "name": "Stamping Press A", "type": "press", "location": "Line 1", "status": "operational", "lastServiced": "2026-07-30" },
-    { "id": 302, "name": "SMT Line B", "type": "assembly", "location": "Line 2", "status": "operational", "lastServiced": "2026-08-15" },
-    { "id": 303, "name": "CNC Mill C", "type": "machining", "location": "Line 3", "status": "maintenance", "lastServiced": "2026-09-04" }
-  ],
-
-  "contracts": [
-    { "id": 201, "vendorId": 9001, "startDate": "2026-01-01", "endDate": "2026-12-31", "discountPct": 5, "minCommitUnits": 5000, "status": "active" },
-    { "id": 202, "vendorId": 9002, "startDate": "2026-06-01", "endDate": "2027-05-31", "discountPct": 8, "minCommitUnits": 2000, "status": "active" }
   ]
 }

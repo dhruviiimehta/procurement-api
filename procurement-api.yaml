@@ -7,7 +7,7 @@ info:
     Kong API gateway demo. Backed by a My JSON Server (Typicode) mock.
 
 servers:
-  - url: https://my-json-server.typicode.com/YOUR_GITHUB_USER/procurement-api
+  - url: https://my-json-server.typicode.com/dhruviiimehta/procurement-api
     description: Typicode My JSON Server (replace with your repo)
 
 paths:
@@ -125,19 +125,6 @@ paths:
               schema: { $ref: "#/components/schemas/PurchaseOrder" }
         "404": { description: Purchase order not found }
 
-  /bill-of-materials:
-    get:
-      operationId: listBillOfMaterials
-      summary: List bills of materials
-      responses:
-        "200":
-          description: A list of BOMs
-          content:
-            application/json:
-              schema:
-                type: array
-                items: { $ref: "#/components/schemas/BillOfMaterials" }
-
   /production-runs:
     get:
       operationId: listProductionRuns
@@ -168,37 +155,6 @@ paths:
               schema:
                 type: array
                 items: { $ref: "#/components/schemas/QualityInspection" }
-
-  /equipment:
-    get:
-      operationId: listEquipment
-      summary: List equipment
-      parameters:
-        - name: status
-          in: query
-          required: false
-          schema: { type: string }
-      responses:
-        "200":
-          description: A list of equipment
-          content:
-            application/json:
-              schema:
-                type: array
-                items: { $ref: "#/components/schemas/Equipment" }
-
-  /contracts:
-    get:
-      operationId: listContracts
-      summary: List vendor contracts
-      responses:
-        "200":
-          description: A list of contracts
-          content:
-            application/json:
-              schema:
-                type: array
-                items: { $ref: "#/components/schemas/Contract" }
 
 components:
   schemas:
@@ -240,28 +196,14 @@ components:
               materialId: { type: integer }
               qty: { type: number }
               unitCost: { type: number }
-    BillOfMaterials:
-      type: object
-      properties:
-        id: { type: integer }
-        productId: { type: integer }
-        productName: { type: string }
-        components:
-          type: array
-          items:
-            type: object
-            properties:
-              materialId: { type: integer }
-              qtyPerUnit: { type: number }
     ProductionRun:
       type: object
       properties:
         id: { type: integer }
-        productId: { type: integer }
-        bomId: { type: integer }
+        productName: { type: string }
         quantity: { type: integer }
         status: { type: string }
-        equipmentId: { type: integer }
+        equipment: { type: string }
         startDate: { type: string, format: date }
         endDate: { type: string, format: date, nullable: true }
         yieldPct: { type: number, nullable: true }
@@ -277,22 +219,3 @@ components:
         defectRate: { type: number }
         inspectedDate: { type: string, format: date }
         notes: { type: string }
-    Equipment:
-      type: object
-      properties:
-        id: { type: integer }
-        name: { type: string }
-        type: { type: string }
-        location: { type: string }
-        status: { type: string }
-        lastServiced: { type: string, format: date }
-    Contract:
-      type: object
-      properties:
-        id: { type: integer }
-        vendorId: { type: integer }
-        startDate: { type: string, format: date }
-        endDate: { type: string, format: date }
-        discountPct: { type: number }
-        minCommitUnits: { type: integer }
-        status: { type: string }
