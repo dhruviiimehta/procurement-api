@@ -1,0 +1,46 @@
+{
+  "vendors": [
+    { "id": 9001, "name": "WidgetWorks Mfg", "country": "US", "category": "metals", "leadTimeDays": 7, "rating": 4.6, "paymentTerms": "NET30", "status": "active" },
+    { "id": 9002, "name": "GadgetForge Ltd", "country": "DE", "category": "electronics", "leadTimeDays": 21, "rating": 4.2, "paymentTerms": "NET45", "status": "active" },
+    { "id": 9003, "name": "CableCo Asia", "country": "CN", "category": "components", "leadTimeDays": 30, "rating": 3.9, "paymentTerms": "NET60", "status": "on_hold" }
+  ],
+
+  "raw-materials": [
+    { "id": 101, "sku": "ALU-SHEET-2MM", "name": "Aluminium Sheet 2mm", "unit": "sqm", "unitCost": 14.5, "vendorId": 9001, "hazardous": false },
+    { "id": 102, "sku": "STL-ROD-10MM", "name": "Steel Rod 10mm", "unit": "m", "unitCost": 3.2, "vendorId": 9001, "hazardous": false },
+    { "id": 103, "sku": "PCB-BLANK-4L", "name": "PCB Blank 4-Layer", "unit": "each", "unitCost": 6.75, "vendorId": 9002, "hazardous": false },
+    { "id": 104, "sku": "SOLV-IPA-99", "name": "Isopropyl Alcohol 99%", "unit": "litre", "unitCost": 2.1, "vendorId": 9003, "hazardous": true }
+  ],
+
+  "purchase-orders": [
+    { "id": 5001, "vendorId": 9001, "status": "received", "orderDate": "2026-08-14", "currency": "USD", "total": 2900.0, "lineItems": [ { "materialId": 101, "qty": 100, "unitCost": 14.5 }, { "materialId": 102, "qty": 450, "unitCost": 3.2 } ] },
+    { "id": 5002, "vendorId": 9002, "status": "approved", "orderDate": "2026-09-01", "currency": "EUR", "total": 3375.0, "lineItems": [ { "materialId": 103, "qty": 500, "unitCost": 6.75 } ] },
+    { "id": 5003, "vendorId": 9003, "status": "pending_approval", "orderDate": "2026-09-06", "currency": "USD", "total": 420.0, "lineItems": [ { "materialId": 104, "qty": 200, "unitCost": 2.1 } ] }
+  ],
+
+  "bill-of-materials": [
+    { "id": 401, "productId": 7001, "productName": "Blue Widget", "components": [ { "materialId": 101, "qtyPerUnit": 0.25 }, { "materialId": 102, "qtyPerUnit": 0.5 } ] },
+    { "id": 402, "productId": 7003, "productName": "Gadget Pro", "components": [ { "materialId": 103, "qtyPerUnit": 1 }, { "materialId": 104, "qtyPerUnit": 0.05 } ] }
+  ],
+
+  "production-runs": [
+    { "id": 6001, "productId": 7001, "bomId": 401, "quantity": 400, "status": "completed", "equipmentId": 301, "startDate": "2026-08-20", "endDate": "2026-08-21", "yieldPct": 98.5 },
+    { "id": 6002, "productId": 7003, "bomId": 402, "quantity": 500, "status": "in_progress", "equipmentId": 302, "startDate": "2026-09-05", "endDate": null, "yieldPct": null }
+  ],
+
+  "quality-inspections": [
+    { "id": 8001, "runId": 6001, "inspector": "M. Alvarez", "result": "pass", "defectRate": 1.5, "inspectedDate": "2026-08-21" },
+    { "id": 8002, "materialId": 104, "poId": 5003, "inspector": "R. Okafor", "result": "fail", "defectRate": 12.0, "inspectedDate": "2026-09-07", "notes": "Purity below spec" }
+  ],
+
+  "equipment": [
+    { "id": 301, "name": "Stamping Press A", "type": "press", "location": "Line 1", "status": "operational", "lastServiced": "2026-07-30" },
+    { "id": 302, "name": "SMT Line B", "type": "assembly", "location": "Line 2", "status": "operational", "lastServiced": "2026-08-15" },
+    { "id": 303, "name": "CNC Mill C", "type": "machining", "location": "Line 3", "status": "maintenance", "lastServiced": "2026-09-04" }
+  ],
+
+  "contracts": [
+    { "id": 201, "vendorId": 9001, "startDate": "2026-01-01", "endDate": "2026-12-31", "discountPct": 5, "minCommitUnits": 5000, "status": "active" },
+    { "id": 202, "vendorId": 9002, "startDate": "2026-06-01", "endDate": "2027-05-31", "discountPct": 8, "minCommitUnits": 2000, "status": "active" }
+  ]
+}

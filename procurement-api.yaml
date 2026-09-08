@@ -1,0 +1,298 @@
+openapi: "3.0.0"
+info:
+  title: Procurement & Manufacturing API
+  version: "1.0.0"
+  description: >
+    Vendors, raw materials, purchase orders and production data for the
+    Kong API gateway demo. Backed by a My JSON Server (Typicode) mock.
+
+servers:
+  - url: https://my-json-server.typicode.com/YOUR_GITHUB_USER/procurement-api
+    description: Typicode My JSON Server (replace with your repo)
+
+paths:
+  /vendors:
+    get:
+      operationId: listVendors
+      summary: List vendors
+      description: Returns all vendors. Filterable by category and status.
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema: { type: string }
+          description: Filter by vendor category (e.g. metals, electronics)
+        - name: status
+          in: query
+          required: false
+          schema: { type: string }
+          description: Filter by vendor status (active, on_hold)
+      responses:
+        "200":
+          description: A list of vendors
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Vendor" }
+  /vendors/{id}:
+    get:
+      operationId: getVendor
+      summary: Get a vendor by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Vendor details
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Vendor" }
+        "404": { description: Vendor not found }
+
+  /raw-materials:
+    get:
+      operationId: listRawMaterials
+      summary: List raw materials
+      parameters:
+        - name: vendorId
+          in: query
+          required: false
+          schema: { type: integer }
+          description: Filter materials by supplying vendor
+      responses:
+        "200":
+          description: A list of raw materials
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/RawMaterial" }
+  /raw-materials/{id}:
+    get:
+      operationId: getRawMaterial
+      summary: Get a raw material by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Raw material details
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/RawMaterial" }
+        "404": { description: Raw material not found }
+
+  /purchase-orders:
+    get:
+      operationId: listPurchaseOrders
+      summary: List purchase orders
+      parameters:
+        - name: vendorId
+          in: query
+          required: false
+          schema: { type: integer }
+        - name: status
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        "200":
+          description: A list of purchase orders
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/PurchaseOrder" }
+  /purchase-orders/{id}:
+    get:
+      operationId: getPurchaseOrder
+      summary: Get a purchase order by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: integer }
+      responses:
+        "200":
+          description: Purchase order details
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PurchaseOrder" }
+        "404": { description: Purchase order not found }
+
+  /bill-of-materials:
+    get:
+      operationId: listBillOfMaterials
+      summary: List bills of materials
+      responses:
+        "200":
+          description: A list of BOMs
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/BillOfMaterials" }
+
+  /production-runs:
+    get:
+      operationId: listProductionRuns
+      summary: List production runs
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        "200":
+          description: A list of production runs
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ProductionRun" }
+
+  /quality-inspections:
+    get:
+      operationId: listQualityInspections
+      summary: List quality inspections
+      responses:
+        "200":
+          description: A list of quality inspections
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/QualityInspection" }
+
+  /equipment:
+    get:
+      operationId: listEquipment
+      summary: List equipment
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        "200":
+          description: A list of equipment
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Equipment" }
+
+  /contracts:
+    get:
+      operationId: listContracts
+      summary: List vendor contracts
+      responses:
+        "200":
+          description: A list of contracts
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Contract" }
+
+components:
+  schemas:
+    Vendor:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        country: { type: string }
+        category: { type: string }
+        leadTimeDays: { type: integer }
+        rating: { type: number }
+        paymentTerms: { type: string }
+        status: { type: string }
+    RawMaterial:
+      type: object
+      properties:
+        id: { type: integer }
+        sku: { type: string }
+        name: { type: string }
+        unit: { type: string }
+        unitCost: { type: number }
+        vendorId: { type: integer }
+        hazardous: { type: boolean }
+    PurchaseOrder:
+      type: object
+      properties:
+        id: { type: integer }
+        vendorId: { type: integer }
+        status: { type: string }
+        orderDate: { type: string, format: date }
+        currency: { type: string }
+        total: { type: number }
+        lineItems:
+          type: array
+          items:
+            type: object
+            properties:
+              materialId: { type: integer }
+              qty: { type: number }
+              unitCost: { type: number }
+    BillOfMaterials:
+      type: object
+      properties:
+        id: { type: integer }
+        productId: { type: integer }
+        productName: { type: string }
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              materialId: { type: integer }
+              qtyPerUnit: { type: number }
+    ProductionRun:
+      type: object
+      properties:
+        id: { type: integer }
+        productId: { type: integer }
+        bomId: { type: integer }
+        quantity: { type: integer }
+        status: { type: string }
+        equipmentId: { type: integer }
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date, nullable: true }
+        yieldPct: { type: number, nullable: true }
+    QualityInspection:
+      type: object
+      properties:
+        id: { type: integer }
+        runId: { type: integer }
+        materialId: { type: integer }
+        poId: { type: integer }
+        inspector: { type: string }
+        result: { type: string }
+        defectRate: { type: number }
+        inspectedDate: { type: string, format: date }
+        notes: { type: string }
+    Equipment:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        type: { type: string }
+        location: { type: string }
+        status: { type: string }
+        lastServiced: { type: string, format: date }
+    Contract:
+      type: object
+      properties:
+        id: { type: integer }
+        vendorId: { type: integer }
+        startDate: { type: string, format: date }
+        endDate: { type: string, format: date }
+        discountPct: { type: number }
+        minCommitUnits: { type: integer }
+        status: { type: string }
