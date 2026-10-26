@@ -1,0 +1,15 @@
+{
+  "name": "procurement-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Procurement & manufacturing mock REST API (json-server)",
+  "scripts": {
+    "start": "json-server db.json --host 0.0.0.0 --port ${PORT:-3000}"
+  },
+  "dependencies": {
+    "json-server": "0.17.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
